@@ -15,7 +15,7 @@
 # control rig actuators.
 
 
-import RPi.GPIO as GPIO
+#import RPi.GPIO as GPIO
 import time
 
 #default pulse used by control act function
@@ -26,7 +26,7 @@ class Relays:
     #parameters are pin numbers for actuator controls in the given order
     #instantiated as relays = Relays(LEFT_PIN, RIGHT_PIN, UP_PIN, DOWN_PIN) in run_auto_leveler.py
     def __init__(self, left, right, up, down):
-        GPIO.setmode(GPIO.BCM)
+        #GPIO.setmode(GPIO.BCM)
 
         #set pin variables
         self.left = left
@@ -34,10 +34,9 @@ class Relays:
         self.up = up
         self.down = down
         
-        #TODO: not needed since invertRigSignal has been removed
-        #self.outputInverted = False
-        self.on = GPIO.LOW
-        self.off = GPIO.HIGH
+
+        # self.on = GPIO.LOW
+        # self.off = GPIO.HIGH
         
         #set inverted indicators
         self.rollInverted = 0
@@ -52,10 +51,10 @@ class Relays:
         self.stayOn = False
 
         #set up pin outputs with provided direction values
-        GPIO.setup(left,GPIO.OUT, initial=GPIO.HIGH)
-        GPIO.setup(right,GPIO.OUT, initial=GPIO.HIGH)
-        GPIO.setup(up,GPIO.OUT, initial=GPIO.HIGH)
-        GPIO.setup(down,GPIO.OUT, initial=GPIO.HIGH)
+        # GPIO.setup(left,GPIO.OUT, initial=GPIO.HIGH)
+        # GPIO.setup(right,GPIO.OUT, initial=GPIO.HIGH)
+        # GPIO.setup(up,GPIO.OUT, initial=GPIO.HIGH)
+        # GPIO.setup(down,GPIO.OUT, initial=GPIO.HIGH)
 
     #TODO: not needed since invertRigSignal has been removed
     def setLowOut(self):

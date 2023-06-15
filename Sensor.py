@@ -15,7 +15,7 @@
 
 import time
 from time import sleep
-import serial
+#import serial
 import numpy.polynomial.polynomial
 
 ORDER = 5

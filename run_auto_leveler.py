@@ -69,14 +69,14 @@ from Relays import *
 from Settings import *
 
 #used for communication with sensors
-import serial
+#import serial
 
 #gui packages
 import tkinter as tk
 from tkinter import ttk
 from tkinter import *
 from tkinter import messagebox
-from playsound import playsound
+#from playsound import playsound
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, 
 NavigationToolbar2Tk)
@@ -116,13 +116,13 @@ WINDOW_SIZE = "1918x1014"
 
 RANGE = 20000
 
-#Serial connection settings:
-PORT = "/dev/ttyAMA0" 
-BAUDRATE = 9600
-BYTESIZE = serial.EIGHTBITS
-PARITY = serial.PARITY_NONE
-STOPBITS = serial.STOPBITS_ONE
-TIMEOUT = 1
+# #Serial connection settings:
+# PORT = "/dev/ttyAMA0" 
+# BAUDRATE = 9600
+# BYTESIZE = serial.EIGHTBITS
+# PARITY = serial.PARITY_NONE
+# STOPBITS = serial.STOPBITS_ONE
+# TIMEOUT = 1
 
 # GUI helper functions - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -763,21 +763,21 @@ tabs.add(tab3, text ='Sensor Setup')
 tabs.pack(expand = 1, fill ="both")
 
 #initialize ADC
-try:
-    ADC = serial.Serial(port = PORT, 
-                        baudrate = BAUDRATE,
-                        bytesize=BYTESIZE,
-                        parity = PARITY,
-                        stopbits=STOPBITS,
-                        timeout = TIMEOUT)
+# try:
+#     ADC = serial.Serial(port = PORT, 
+#                         baudrate = BAUDRATE,
+#                         bytesize=BYTESIZE,
+#                         parity = PARITY,
+#                         stopbits=STOPBITS,
+#                         timeout = TIMEOUT)
     
-    if(ADC.isOpen() == False):
-        print("Serial Port Error")
-        GPIO.cleanup()
-        exit()
+#     if(ADC.isOpen() == False):
+#         print("Serial Port Error")
+#         GPIO.cleanup()
+#         exit()
     
-except IOError as e:
-    print(e)
+# except IOError as e:
+#     print(e)
 
 #initialze settings
 settings = Settings(SETTINGS_FILE)
@@ -1106,26 +1106,22 @@ plot("Roll", rollRaw, rollCalc, 3, "Roll", frame_roll)
 save = tk.Button(tab3, text = "Save Settings", font = ("Roboto", 25), command = saveSensorSettings)
 save.grid(row = 7, column = 8, columnspan = 2, pady = 10)
 
-#plotLine("Pitch", pitchRaw, pitchCalc, settings.getSetting("order"), "Pitch")
-#plotLine("Roll", rollRaw, rollCalc, settings.getSetting("order"), "Roll")
-
-
 
 # RUN PROGRAM - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 #initalize sensors
-pitch = Sensor("pitch", ADC, pitchRaw, pitchCalc, settings.getSetting("data"))
-roll = Sensor("roll", ADC, rollRaw, rollCalc, settings.getSetting("data"))
+#pitch = Sensor("pitch", ADC, pitchRaw, pitchCalc, settings.getSetting("data"))
+#roll = Sensor("roll", ADC, rollRaw, rollCalc, settings.getSetting("data"))
 
 try:
-    displayColor()
+    #displayColor()
 
     #continuously updates pitch and roll values
     #looped only for visual indication, not necessary for the function of the program
-    while True:
-        getReading(pitch)
-        getReading(roll)
-        time.sleep(READING_REFRESH)
+    # while True:
+    #     getReading(pitch)
+    #     getReading(roll)
+    #     time.sleep(READING_REFRESH)
     #never reached
     root.mainloop()
 
