@@ -1097,17 +1097,14 @@ frame_roll = Frame(tab3)
 frame_roll.grid(row=8, column=4, columnspan = 3)
 
 
-plot("Pitch", pitchRaw, pitchCalc, 3, "Pitch", frame_pitch)
-plot("Roll", rollRaw, rollCalc, 3, "Roll", frame_roll)
+plot("Pitch", pitchRaw, pitchCalc, settings.getSetting("order"), "Pitch", frame_pitch)
+plot("Roll", rollRaw, rollCalc, settings.getSetting("order"), "Roll", frame_roll)
 
 
 
 #save Button
 save = tk.Button(tab3, text = "Save Settings", font = ("Roboto", 25), command = saveSensorSettings)
 save.grid(row = 7, column = 8, columnspan = 2, pady = 10)
-
-#plotLine("Pitch", pitchRaw, pitchCalc, settings.getSetting("order"), "Pitch")
-#plotLine("Roll", rollRaw, rollCalc, settings.getSetting("order"), "Roll")
 
 
 
