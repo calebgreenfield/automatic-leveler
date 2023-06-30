@@ -219,7 +219,7 @@ def saveSensorSettings():
         array.append(orderEntry.get())
         
         settings.setNewSensorSettings(array)
-        #test
+    
         
 
 #executes when new priority is selected, sets either pitch or roll to be leveled first
@@ -664,18 +664,13 @@ def saveZeros2():
         display.configure(text = "Zero set")
         smallDisplay.configure(text = "")
         
-def plot(title, x,y, order, label, frame):
+def plot(title, coefficients, x,y, label, frame):
     
     # the figure that will contain the plot
     fig = Figure(figsize = (6, 4),
                  dpi = 100)
     # adding the subplot
     plot1 = fig.add_subplot(111)
-    
-    coefficients = np.polynomial.polynomial.Polynomial.fit(
-    x, # raw values
-    y, # corresponding angle values to the raw values
-    order) # order of polynomial
     
     p = np.polynomial.polynomial.Polynomial(coefficients)
 
@@ -1098,11 +1093,6 @@ frame_roll = Frame(tab3)
 frame_roll.grid(row=8, column=4, columnspan = 3)
 
 
-plot("Pitch", pitchRaw, pitchCalc, settings.getSetting("order"), "Pitch", frame_pitch)
-plot("Roll", rollRaw, rollCalc, settings.getSetting("order"), "Roll", frame_roll)
-
-
-
 #save Button
 save = tk.Button(tab3, text = "Save Settings", font = ("Roboto", 25), command = saveSensorSettings)
 save.grid(row = 7, column = 8, columnspan = 2, pady = 10)
@@ -1112,8 +1102,11 @@ save.grid(row = 7, column = 8, columnspan = 2, pady = 10)
 # RUN PROGRAM - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 #initalize sensors
-pitch = Sensor("pitch", ADC, pitchRaw, pitchCalc, settings.getSetting("data"))
-roll = Sensor("roll", ADC, rollRaw, rollCalc, settings.getSetting("data"))
+pitch = Sensor("pitch", ADC, pitchRaw, pitchCalc, settings.getSetting("data"), settings.getSetting("order"))
+roll = Sensor("roll", ADC, rollRaw, rollCalc, settings.getSetting("data"), settings.getSetting("order"))
+
+plot("Pitch", pitch.getCoefficients(), pitchRaw, pitchCalc, "Pitch", frame_pitch)
+plot("Roll", roll.getCoefficients(), rollRaw, rollCalc, "Roll", frame_roll)
 
 try:
     displayColor()

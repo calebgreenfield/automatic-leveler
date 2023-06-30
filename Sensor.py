@@ -40,7 +40,7 @@ class Sensor:
     #initializes sensor objects
     #instatntiated as pitch = Sensor("pitch", 1, ADC)   roll = Sensor("roll", 0, ADC) in run_auto_leveler.py
     #parameters are sensor name, channel on ADC, and ADC object initialized in run_auto_leveler.py
-    def __init__(self, name, ADCinit, sensorVals, minutes, raw):
+    def __init__(self, name, ADCinit, sensorVals, minutes, raw, order):
         #initalize sensor variables
         self.reading = 0
         self.name = name
@@ -62,7 +62,7 @@ class Sensor:
         self.coefficients = numpy.polynomial.polynomial.Polynomial.fit(
                 sensorVals, # raw values
                 minutes, # corresponding angle values to the raw values
-                ORDER) # order of polynomial
+                order) # order of polynomial
         
         
     #returns string if print(sensor) is called
@@ -125,5 +125,9 @@ class Sensor:
     
     def getName(self):
         return self.name
+    
+    def getCoefficients(self):
+        return self.coefficients
+
     
     
