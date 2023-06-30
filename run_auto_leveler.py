@@ -219,6 +219,7 @@ def saveSensorSettings():
         array.append(orderEntry.get())
         
         settings.setNewSensorSettings(array)
+        #test
         
 
 #executes when new priority is selected, sets either pitch or roll to be leveled first
